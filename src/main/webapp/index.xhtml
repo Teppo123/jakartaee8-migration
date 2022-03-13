@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"> <h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>User List</title>
+</h:head> <h:body>
+
+	<h:form id="form">
+		<p:panel header="Create user">
+			<p:panelGrid columns="3" layout="grid" cellpadding="4">
+				<p:inputText id="firstName" value="${userBean.firstName}"
+					label="First name" placeholder="First name" />
+				<p:inputText id="lastName" value="${userBean.lastName}"
+					label="Last name" placeholder="Last name" />
+				<p:commandButton id="btn" action="#{userBean.add}" update="form"
+					icon="ui-icon-disk" />
+			</p:panelGrid>
+		</p:panel>
+		<p:dataTable id="table" var="user" value="#{userBean.users}">
+			<p:column headerText="User ID">
+				<h:outputText value="#{user.id}" type="hidden" />
+			</p:column>
+			<p:column headerText="First name">
+				<h:outputText value="#{user.firstName}" />
+			</p:column>
+			<p:column headerText="Last name">
+				<h:outputText value="#{user.lastName}" />
+			</p:column>
+			<p:column>
+				<p:commandButton action="#{userBean.deleteUser(user.id)}"
+					icon="ui-icon-trash" update="form" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body> </html>
